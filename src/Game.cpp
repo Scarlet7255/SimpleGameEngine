@@ -1,7 +1,9 @@
 #include "Game.h"
 #include "GameObject.h"
+#include "glew.h"
+
 SDL_Window* Game::mWindow = nullptr;
-SDL_Renderer* Game::mRenderer = nullptr;
+SDL_GLContext Game::mOpenGLContext = NULL;
 
 bool Game::mIsRunning = false;
 Uint32 Game::mTickCount = 0;
@@ -19,14 +21,15 @@ bool Game::Initialize()
         SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         return false;
     }
-
+   
+    ConfigOpenGL();
     mWindow = SDL_CreateWindow(
         "Game Engine",// window title
         100, // top left x-coordinate of window
         100, // top left y-coordinate of window
         1024,// window width
         768, // window height
-        0 // window set flag
+        SDL_WINDOW_OPENGL// window set flag
     );
 
     if (!mWindow) 
@@ -34,18 +37,15 @@ bool Game::Initialize()
         SDL_Log("Unable to initialize SDL Window: %s", SDL_GetError());
         return false;
     }
+    mOpenGLContext = SDL_GL_CreateContext(mWindow);
     
-    mRenderer = SDL_CreateRenderer( //create basic 2D SDL renderer
-        mWindow,
-        -1, 
-        SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC
-    );
-
-    if (!mRenderer) 
+    glewExperimental = true;
+    if (glewInit() != GLEW_OK) 
     {
-        SDL_Log("Unable to initialize SDL Renderer: %s", SDL_GetError());
+        SDL_Log("Failed to initialize GLEW");
         return false;
     }
+    
     return true;
 }
 
@@ -115,21 +115,9 @@ void Game::UpdateGame()
             }
         }
     }
-}
 
-void Game::GenerateOutput()
-{
-    SDL_SetRenderDrawColor(
-        mRenderer,
-        0,
-        100,
-        100,
-        255
-    );
-    SDL_RenderClear(mRenderer);
-    SDL_RenderPresent(mRenderer);
-
-    for (auto it = mDeadGameObjects.begin(); it != mDeadGameObjects.end(); ++it) 
+    // delay removev and create GameObjects
+    for (auto it = mDeadGameObjects.begin(); it != mDeadGameObjects.end(); ++it)
     {
         for (auto i = mGameObjects.begin(); i != mGameObjects.end(); ++i)
         {
@@ -141,9 +129,32 @@ void Game::GenerateOutput()
         }
         delete (*it);
     }
+
     mDeadGameObjects.clear();
-    for (auto i : mNewGameObjects) 
+    for (auto i : mNewGameObjects)
     {
         mGameObjects.push_back(i);
     }
+}
+
+void Game::GenerateOutput()
+{
+
+}
+
+void Game::ConfigOpenGL()
+{
+    //Use core core OpenGL profile
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    // Choose OpenGL version
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    // Request 8-bits color buffer pre RGB channel
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    // Enable double buffering
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    //  Force Open_GL use hardware acceleration
+    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 }

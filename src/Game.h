@@ -25,9 +25,11 @@ private:
 	// Update Game Logic
 	static void UpdateGame();
 	static void GenerateOutput();
+
+	static void ConfigOpenGL();
 	
 	static SDL_Window* mWindow;
-	static SDL_Renderer* mRenderer;
+	static SDL_GLContext mOpenGLContext;
 
 	static bool mIsRunning;
 	static Uint32 mTickCount;
