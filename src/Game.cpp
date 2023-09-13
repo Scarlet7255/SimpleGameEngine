@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "GameObject.h"
-#include "glew.h"
 
 SDL_Window* Game::mWindow = nullptr;
 SDL_GLContext Game::mOpenGLContext = NULL;
@@ -45,12 +44,13 @@ bool Game::Initialize()
         SDL_Log("Failed to initialize GLEW");
         return false;
     }
-    
+    glGetError();
     return true;
 }
 
 void Game::Exit() 
 {
+    SDL_GL_DeleteContext(mOpenGLContext);
     SDL_DestroyWindow(mWindow);
     SDL_Quit();
 
@@ -139,7 +139,12 @@ void Game::UpdateGame()
 
 void Game::GenerateOutput()
 {
+    // set color to gray
+    glClearColor(0.0f, 0.5f, 0.86f,1.0f);
+    // clear color buffer
+    glClear(GL_COLOR_BUFFER_BIT);
 
+    SDL_GL_SwapWindow(mWindow);
 }
 
 void Game::ConfigOpenGL()

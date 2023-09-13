@@ -5,6 +5,8 @@
 #include <SDL.h>
 #include <vector>
 #include <unordered_set>
+#include <glew.h>
+
 
 class Game
 {
