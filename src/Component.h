@@ -21,6 +21,20 @@ public:
 	{
 		if (mState != Dead)
 			mState = state;
+		switch (mState)
+		{
+		case Component::Enable:
+			OnEnable();
+			break;
+		case Component::Disable:
+			OnDisable();
+			break;
+		case Component::Dead:
+			OnDestroy();
+			break;
+		default:
+			break;
+		}
 	}
 
 	int GetUpdateOrder() const {

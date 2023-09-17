@@ -13,39 +13,60 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Source Files\Skeleton">
+      <UniqueIdentifier>{086a5788-63ed-430a-8f33-ff41f56b5835}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Skeleton">
+      <UniqueIdentifier>{26c47a4a-4769-4a53-aa54-ad58672d10c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component">
+      <UniqueIdentifier>{ed627a96-992f-423d-a0e2-f18951e6a81b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Component">
+      <UniqueIdentifier>{2f052a03-45e9-4262-bbb2-a363d3033883}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Component.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Skeleton</Filter>
     </ClCompile>
     <ClCompile Include="src\Game.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Skeleton</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Skeleton</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Skeleton</Filter>
     </ClCompile>
     <ClCompile Include="src\VertexArray.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>Source Files\Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Renderer.cpp">
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Component.h">
-      <Filter>include</Filter>
+      <Filter>include\Skeleton</Filter>
     </ClInclude>
     <ClInclude Include="src\Game.h">
-      <Filter>include</Filter>
+      <Filter>include\Skeleton</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObject.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Main.h">
-      <Filter>include</Filter>
+      <Filter>include\Skeleton</Filter>
     </ClInclude>
     <ClInclude Include="src\VertexArray.h">
-      <Filter>include</Filter>
+      <Filter>include\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader.h">
+      <Filter>include\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Renderer.h">
+      <Filter>include\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

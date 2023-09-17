@@ -1,5 +1,9 @@
 #include "Game.h"
 #include "GameObject.h"
+#include "Components/Renderer.h"
+#include <algorithm>
+#include "Shader.h"
+#include "VertexArray.h"
 
 SDL_Window* Game::mWindow = nullptr;
 SDL_GLContext Game::mOpenGLContext = NULL;
@@ -10,6 +14,24 @@ Uint32 Game::mTickCount = 0;
 std::vector<class GameObject* > Game::mGameObjects;
 std::unordered_set<class GameObject* > Game::mDeadGameObjects;
 std::vector<class GameObject* > Game::mNewGameObjects;
+std::vector<class Renderer*> Game::mRenderers;
+
+
+//temp data
+
+float vertexBuffer[] = {
+    -0.5f, 0.5f, 0.0f,
+    0.5f, 0.5f, 0.0f,
+    0.5f, -0.5f, 0.0f,
+    -0.5f, -0.5f, 0.0f
+};
+
+unsigned int indexBuffer[] = {
+    0,1,2,
+    2,3,0
+};
+Shader* shader = new Shader();
+VertexArray* vertex = nullptr;
 
 bool Game::Initialize()
 {
@@ -45,6 +67,10 @@ bool Game::Initialize()
         return false;
     }
     glGetError();
+
+    //temp code
+    vertex = new VertexArray(vertexBuffer, 4, indexBuffer, 6);
+    shader->Load("src/Shader/Basic.vert","src/Shader/Basic.frag");
     return true;
 }
 
@@ -67,6 +93,16 @@ void Game::RemoveGameObject(GameObject* obj)
         obj->Destroy();
         mDeadGameObjects.insert(obj);
     }
+}
+
+void Game::AddRenderer(Renderer* renderer)
+{
+    mRenderers.push_back(renderer);
+}
+
+void Game::RemoveRenderer(Renderer* renderer)
+{
+    mRenderers.erase(std::remove(mRenderers.begin(), mRenderers.end(), renderer), mRenderers.end());
 }
 
 void Game::GameLoop()
@@ -101,18 +137,18 @@ void Game::ProcessInput()
 
 void Game::UpdateGame()
 {
-    float deltaTime = (SDL_GetTicks() - mTickCount) / 1000.0f;
     while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTickCount + 16));// limit max fps
-    
+    float deltaTime = (SDL_GetTicks() - mTickCount) / 1000.0f;
+    mTickCount = SDL_GetTicks();
     if (deltaTime > 0.05f) 
     {
         deltaTime = 0.05f;
-        for (auto i : mGameObjects) 
+    }
+    for (auto i : mGameObjects)
+    {
+        if (i->GetState() == GameObject::EActive)
         {
-            if (i->GetState() == GameObject::EActive) 
-            {
-                i->Update(deltaTime);
-            }
+            i->Update(deltaTime);
         }
     }
 
@@ -134,6 +170,7 @@ void Game::UpdateGame()
     for (auto i : mNewGameObjects)
     {
         mGameObjects.push_back(i);
+        i->Wake();
     }
 }
 
@@ -144,6 +181,12 @@ void Game::GenerateOutput()
     // clear color buffer
     glClear(GL_COLOR_BUFFER_BIT);
 
+    vertex->Active();
+    shader->Active();
+    for (auto renderer : mRenderers) 
+    {
+        renderer->Draw(shader);
+    }
     SDL_GL_SwapWindow(mWindow);
 }
 
@@ -158,6 +201,7 @@ void Game::ConfigOpenGL()
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
     // Enable double buffering
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     //  Force Open_GL use hardware acceleration

@@ -1,13 +1,15 @@
-#include "Main.h"
 #include "Game.h"
-
+#include "GameObject.h"
+#include "Components/Renderer.h"
 int main(int argc, char* argv[])
 {
-	Game* game = new Game();
-	bool success = game->Initialize();
+	bool success = Game::Initialize();
+	GameObject* test = new GameObject("test");
+	test->AddComponent(new Renderer(test));
+	Game::AddGameObject(test);
 	if (success) 
 	{
-		game->GameLoop();
+		Game::GameLoop();
 	}
 	return 0;
 }

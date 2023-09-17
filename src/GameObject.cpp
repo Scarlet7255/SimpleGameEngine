@@ -97,6 +97,7 @@ void GameObject::AddNewComponents()
 	for (const auto i : mNewComponents) 
 	{
 		mComponents.push_back(i);
+		i->SetState(Component::Enable);
 	}
 	mNewComponents.clear();
 	sort(mComponents.begin(), mComponents.end(), [](Component* a, Component* b) {

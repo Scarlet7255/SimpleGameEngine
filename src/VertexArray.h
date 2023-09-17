@@ -9,7 +9,7 @@ public:
 		const unsigned int* indices, unsigned int numIndices);
 	~VertexArray();
 
-	void SetActive();
+	void Active();
 	unsigned int GetNumIndices() const { return mNumIndices; }
 	unsigned int GetNumVerts() const { return mNumVerts; }
 private:

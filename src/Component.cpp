@@ -7,6 +7,7 @@ Component::Component(GameObject* owner, int updateOrder)
 
 Component::~Component()
 {
+	OnDisable();
 	OnDestroy();
 }
 
