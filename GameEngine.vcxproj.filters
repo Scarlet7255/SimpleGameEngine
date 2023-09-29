@@ -36,9 +36,6 @@
     <ClCompile Include="src\GameObject.cpp">
       <Filter>Source Files\Skeleton</Filter>
     </ClCompile>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>Source Files\Skeleton</Filter>
-    </ClCompile>
     <ClCompile Include="src\VertexArray.cpp">
       <Filter>Source Files\Skeleton</Filter>
     </ClCompile>
@@ -46,6 +43,12 @@
       <Filter>Source Files\Skeleton</Filter>
     </ClCompile>
     <ClCompile Include="src\Components\Renderer.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Transform.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,6 +69,9 @@
       <Filter>include\Skeleton</Filter>
     </ClInclude>
     <ClInclude Include="src\Components\Renderer.h">
+      <Filter>include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Transform.h">
       <Filter>include\Component</Filter>
     </ClInclude>
   </ItemGroup>

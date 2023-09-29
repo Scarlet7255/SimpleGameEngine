@@ -1,5 +1,6 @@
 E:\CPP\GameEngine\src\Component.cpp;E:\CPP\GameEngine\x64\Debug\Component.obj
 E:\CPP\GameEngine\src\Components\Renderer.cpp;E:\CPP\GameEngine\x64\Debug\Renderer.obj
+E:\CPP\GameEngine\src\Components\Transform.cpp;E:\CPP\GameEngine\x64\Debug\Transform.obj
 E:\CPP\GameEngine\src\Game.cpp;E:\CPP\GameEngine\x64\Debug\Game.obj
 E:\CPP\GameEngine\src\GameObject.cpp;E:\CPP\GameEngine\x64\Debug\GameObject.obj
 E:\CPP\GameEngine\src\Main.cpp;E:\CPP\GameEngine\x64\Debug\Main.obj

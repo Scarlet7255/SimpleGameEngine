@@ -110,13 +110,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\SDL2-devel-2.28.3-VC\SDL2-2.28.3\include;.\glew-2.2.0-win32\glew-2.2.0\include\GL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\External\SDL2-devel-2.28.3-VC\SDL2-2.28.3\include;.\External\glew-2.2.0-win32\glew-2.2.0\include\GL;E:\CPP\GameEngine\External\eigen-3.4.0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>.\SDL2-devel-2.28.3-VC\SDL2-2.28.3\lib\x64;E:\CPP\GameEngine\glew-2.2.0-win32\glew-2.2.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>.\SDL2-devel-2.28.3-VC\SDL2-2.28.3\lib\x64\SDL2.lib;.\SDL2-devel-2.28.3-VC\SDL2-2.28.3\lib\x64\SDL2main.lib;.\glew-2.2.0-win32\glew-2.2.0\lib\Release\x64\glew32.lib;.\glew-2.2.0-win32\glew-2.2.0\lib\Release\x64\glew32s.lib;.\OpenGL32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\External\SDL2-devel-2.28.3-VC\SDL2-2.28.3\lib\x64;.\External\glew-2.2.0-win32\glew-2.2.0\lib\Release\x64;E:\CPP\GameEngine\External\eigen-3.4.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>.\External\SDL2-devel-2.28.3-VC\SDL2-2.28.3\lib\x64\SDL2.lib;.\External\SDL2-devel-2.28.3-VC\SDL2-2.28.3\lib\x64\SDL2main.lib;.\External\glew-2.2.0-win32\glew-2.2.0\lib\Release\x64\glew32.lib;.\External\glew-2.2.0-win32\glew-2.2.0\lib\Release\x64\glew32s.lib;.\External\OpenGL32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClCompile Include="src\Component.cpp" />
     <ClCompile Include="src\Components\Renderer.cpp" />
+    <ClCompile Include="src\Components\Transform.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -147,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\Components\Renderer.h" />
+    <ClInclude Include="src\Components\Transform.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Shader.h" />
